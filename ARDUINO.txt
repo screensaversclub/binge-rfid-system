@@ -1,0 +1,130 @@
+// Install Arduino IDE https://www.arduino.cc/en/software
+// Install Pico board manager in Arduino https://randomnerdtutorials.com/programming-raspberry-pi-pico-w-arduino-ide/
+// Install PN532 files (copy files in /static/arduino-libraries to ~/Documents/Arduino/libraries)
+
+// for I2C Communication
+#include <Wire.h>
+#include <PN532_I2C.h>
+#include <PN532.h>
+#include <NfcAdapter.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+
+const char* SSID = "Jack";
+const char* PASS = "Ling-224032!";
+const char* SERVER_IP_ADDRESS = "192.168.1.5";
+String readerId = "3"; // 1, 2 or 3
+
+PN532_I2C pn532_i2c(Wire);
+
+int ledpinred=21;
+int ledpingreen=20;
+
+NfcAdapter nfc = NfcAdapter(pn532_i2c);
+
+String tagId = "";
+
+byte nuidPICC[4];
+ 
+void setup(void) {
+  Serial.begin(115200);
+  pinMode(ledpinred,OUTPUT);
+  pinMode(ledpingreen,OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.println("System initialized");
+ 
+  nfc.begin();
+
+  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(ledpingreen, LOW);
+  digitalWrite(ledpinred, LOW);
+
+  wifi_setup(SSID, PASS);
+
+}
+ 
+void loop() {
+  digitalWrite(ledpingreen, LOW);
+  digitalWrite(ledpinred, HIGH);
+  readNFC();
+}
+ 
+void readNFC() {
+  
+  WiFiClient client;
+  HTTPClient http;
+
+  if (nfc.tagPresent()) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(ledpingreen, HIGH);
+    digitalWrite(ledpinred, LOW);
+    NfcTag tag = nfc.read();
+
+    tagId = tag.getUidString();
+
+    Serial.println("Hey");
+    Serial.println(tagId);
+
+    http.begin(client, "http://" + String(SERVER_IP_ADDRESS) + ":4000/tag");
+    
+    tagId.replace("\n", "");    
+    http.addHeader("TAG_ID", tagId);
+    http.addHeader("READER_ID", readerId);
+
+    String httpRequestData = "tag=" + tagId;
+    int httpResponseCode = http.POST(httpRequestData);
+    http.end();
+    
+    // if (client.connect(HOST_NAME, HTTP_PORT)) {      
+    //   client.println(HTTP_METHOD + " " + PATH_NAME + String("?q=") + String(tagId) + " HTTP/1.1");
+    //   client.println("Host: " + String(HOST_NAME));
+    //   client.println("Connection: close");
+    //   client.println(); // end HTTP request header
+    // }
+
+  } else {
+    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(ledpingreen, LOW);
+    digitalWrite(ledpinred, HIGH);
+  }
+  delay(500);
+}
+
+
+
+bool is_wifi_connected() {
+  return WiFi.status() == WL_CONNECTED;
+}
+
+void wifi_setup(const char *ssid, const char *pass) {
+  WiFi.mode(WIFI_STA); // Put wifi into station mode
+  WiFi.begin(ssid, pass); // start connecting to wifi
+
+  Serial.print("Connecting...");
+  while(!is_wifi_connected()) {
+    delay(500);
+    Serial.print(".");
+    delay(500);
+  }
+
+  // connection established
+  Serial.println("");
+  Serial.println("WiFi Connection Established!!");
+  Serial.println(WiFi.SSID());
+
+  // print IP Address
+  Serial.print("Assigned IP: ");
+  Serial.println(WiFi.localIP());
+
+}
+
+// this also checks if wifi is connected and returns the string "No IP" when none found
+String get_ip_addr_to_print() {
+  IPAddress ip = WiFi.localIP();
+  if (is_wifi_connected()) {
+    return WiFi.localIP().toString();
+  } else {
+    return "No IP";
+  }
+}
