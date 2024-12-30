@@ -9,7 +9,7 @@
 		"dev": "pnpm run --parallel \"/^dev:*/\"",
 		"build": "vite build",
 		"prestart": "vite build",
-		"start": "node -r dotenv/config build",
+		"start": "node -r dotenv/config server.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -44,6 +44,7 @@
 		"@types/ws": "^8.5.13",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
+		"node-osc": "^9.1.4",
 		"ws": "^8.18.0"
 	}
 }

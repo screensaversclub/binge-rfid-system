@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
 import { handler } from './build/handler.js';
 import WebSocket from 'ws';
+import { Client } from 'node-osc';
 
 const app = express();
 
@@ -39,6 +40,14 @@ app.post('/tag', (req, res) => {
 	});
 
 	return res.json({ tag, reader });
+});
+
+app.get('/osc', (_, res) => {
+	const osc = new Client('127.0.0.1', 53000);
+	osc.send('/cue/1/start', () => {
+		osc.close();
+	});
+	res.json({ ok: true });
 });
 
 // let SvelteKit handle everything else, including serving prerendered pages and static assets

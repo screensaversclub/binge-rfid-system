@@ -20,6 +20,9 @@ importers:
       express:
         specifier: ^4.21.2
         version: 4.21.2
+      node-osc:
+        specifier: ^9.1.4
+        version: 9.1.4
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -705,6 +708,9 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
+  binpack@0.1.0:
+    resolution: {integrity: sha512-KcSrsGiIKgklTWweVb9XnZPWO1/rGSsK3fwR7VnbDPbLKPlkvSKd/ZrJ1W712r6HzH5u0fa/AZCftATO09x8Aw==}
+
   body-parser@1.20.3:
     resolution: {integrity: sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
@@ -1347,6 +1353,10 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
+  node-osc@9.1.4:
+    resolution: {integrity: sha512-ChkdOHmy2Ay6egrGsL9C7u0RqBQ+VIHjw+lk6yd59TuyzmqbaosCo53E1lvjh1xM97c+ByBhyH6i2dHOiBa2bw==}
+    engines: {node: ^18.17.0 || ^20.5.0 || >=22.0.0}
+
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -1382,6 +1392,10 @@ packages:
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
+
+  osc-min@1.1.2:
+    resolution: {integrity: sha512-8DbiO8ME85R75stgNVCZtHxB9MNBBNcyy+isNBXrsFeinXGjwNAauvKVmGlfRas5VJWC/mhzIx7spR2gFvWxvg==}
+    engines: {node: '>=0.10.0'}
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -2471,6 +2485,8 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
+  binpack@0.1.0: {}
+
   body-parser@1.20.3:
     dependencies:
       bytes: 3.1.2
@@ -3123,6 +3139,10 @@ snapshots:
 
   negotiator@0.6.3: {}
 
+  node-osc@9.1.4:
+    dependencies:
+      osc-min: 1.1.2
+
   node-releases@2.0.19: {}
 
   nodemon@3.1.9:
@@ -3160,6 +3180,10 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
+
+  osc-min@1.1.2:
+    dependencies:
+      binpack: 0.1.0
 
   p-limit@3.1.0:
     dependencies:
