@@ -44,7 +44,30 @@ app.post('/tag', (req, res) => {
 
 app.get('/osc', (_, res) => {
 	const osc = new Client('127.0.0.1', 53000);
+	osc.send('/cue/5/start', () => {
+		osc.close();
+	});
+	res.json({ ok: true });
+});
+
+app.get('/osc/1', (_, res) => {
+	const osc = new Client('127.0.0.1', 53000);
 	osc.send('/cue/1/start', () => {
+		osc.close();
+	});
+	res.json({ ok: true });
+});
+app.get('/osc/2', (_, res) => {
+	const osc = new Client('127.0.0.1', 53000);
+	osc.send('/cue/2/start', () => {
+		osc.close();
+	});
+	res.json({ ok: true });
+});
+
+app.get('/osc/3', (_, res) => {
+	const osc = new Client('127.0.0.1', 53000);
+	osc.send('/cue/3/start', () => {
 		osc.close();
 	});
 	res.json({ ok: true });

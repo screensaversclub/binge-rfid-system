@@ -90,6 +90,28 @@
 	);
 
 	$effect(() => {
+		if (reader1 === 'STICKER_ANDY' || reader1 === 'STICKER_ANT' || reader1 === 'STICKER_APPLE') {
+			fetch(`http://localhost:4000/osc/1`);
+		}
+	});
+
+	$effect(() => {
+		if (reader2 === 'STICKER_BELLE' || reader2 === 'STICKER_BEE' || reader2 == 'STICKER_BANANA') {
+			fetch(`http://localhost:4000/osc/2`);
+		}
+	});
+
+	$effect(() => {
+		if (
+			reader3 === 'STICKER_COLIN' ||
+			reader3 === 'STICKER_CATERPILLAR' ||
+			reader3 == 'STICKER_CANTALOUPE'
+		) {
+			fetch(`http://localhost:4000/osc/3`);
+		}
+	});
+
+	$effect(() => {
 		if (isAllFruits || isAllBugs || isAllPeople) {
 			console.info('pulse');
 			fetch('http://localhost:4000/osc');
