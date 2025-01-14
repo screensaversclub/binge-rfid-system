@@ -90,31 +90,15 @@
 	);
 
 	$effect(() => {
-		if (
-			reader1 === 'STICKER_ANDY' ||
-			reader1 === 'STICKER_ANT' ||
-			reader1 === 'STICKER_APPLE' ||
-			reader2 === 'STICKER_ANDY' ||
-			reader2 === 'STICKER_ANT' ||
-			reader2 === 'STICKER_APPLE' ||
-			reader3 === 'STICKER_ANDY' ||
-			reader3 === 'STICKER_ANT' ||
-			reader3 === 'STICKER_APPLE'
-		) {
+		if (reader1 === 'STICKER_APPLE' || reader2 === 'STICKER_APPLE' || reader3 === 'STICKER_APPLE') {
 			fetch(`http://localhost:4000/osc/1`);
 		}
 	});
 
 	$effect(() => {
 		if (
-			reader1 === 'STICKER_BEE' ||
-			reader1 === 'STICKER_BELLE' ||
 			reader1 === 'STICKER_BANANA' ||
-			reader2 === 'STICKER_BEE' ||
-			reader2 === 'STICKER_BELLE' ||
 			reader2 === 'STICKER_BANANA' ||
-			reader3 === 'STICKER_BEE' ||
-			reader3 === 'STICKER_BELLE' ||
 			reader3 === 'STICKER_BANANA'
 		) {
 			fetch(`http://localhost:4000/osc/2`);
@@ -123,14 +107,8 @@
 
 	$effect(() => {
 		if (
-			reader1 === 'STICKER_COLIN' ||
-			reader1 === 'STICKER_CATERPILLAR' ||
 			reader1 == 'STICKER_CANTALOUPE' ||
-			reader2 === 'STICKER_COLIN' ||
-			reader2 === 'STICKER_CATERPILLAR' ||
 			reader2 == 'STICKER_CANTALOUPE' ||
-			reader3 === 'STICKER_COLIN' ||
-			reader3 === 'STICKER_CATERPILLAR' ||
 			reader3 === 'STICKER_CANTALOUPE'
 		) {
 			fetch(`http://localhost:4000/osc/3`);
