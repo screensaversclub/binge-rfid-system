@@ -33,6 +33,8 @@ app.post('/tag', (req, res) => {
 	const tag = req.header('TAG_ID');
 	const reader = req.header('READER_ID');
 
+	console.info(`detected ${tag} on ${reader}`);
+
 	ws.clients.forEach(function (client) {
 		if (client.readyState === WebSocket.OPEN) {
 			client.send(JSON.stringify({ tag, reader }));
